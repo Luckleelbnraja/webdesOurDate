@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LoveMeet - Chat</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        .status-indicator {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+        .status-online {
+            background-color: #28a745;
+        }
+        .status-offline {
+            background-color: #6c757d;
+        }
+        .status-away {
+            background-color: #ffc107;
+        }
+        .status-busy {
+            background-color: #dc3545;
+        }
+        .chat-container {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+        }
+        .unread-badge {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            width: 18px;
+            height: 18px;
+            background-color: #dc3545;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .typing-indicator {
+            display: inline-block;
+        }
+        .typing-indicator span {
+            height: 8px;
+            width: 8px;
+            float: left;
+            margin: 0 1px;
+            background-color: #9E9EA1;
+            display: block;
+            border-radius: 50%;
+            opacity: 0.4;
+        }
+        .typing-indicator span:first-of-type {
+            animation: typing 1s infinite;
+        }
+        .typing-indicator span:nth-of-type(2) {
+            animation: typing 1s 150ms infinite;
+        }
+        .typing-indicator span:last-of-type {
+            animation: typing 1s 300ms infinite;
+        }
+        @keyframes typing {
+            0% { transform: translateY(0px); }
+            33% { transform: translateY(-5px); }
+            66% { transform: translateY(0px); }
+        }
+        .emoji-picker {
+            position: absolute;
+            bottom: 60px;
+            right: 20px;
+            width: 250px;
+            height: 200px;
+            background-color: white;
+            border: 1px solid #dee2e6;
+            border-radius: 0.25rem;
+            padding: 10px;
+            z-index: 1000;
+            display: none;
+            overflow-y: auto;
+        }
+        .emoji-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+        .emoji-item {
+            cursor: pointer;
+            padding: 5px;
+            font-size: 1.2rem;
+            border-radius: 4px;
+        }
+        .emoji-item:hover {
+            background-color: #f8f9fa;
+        }
+        .message-time {
+            font-size: 0.75rem;
+            margin-top: 5px;
+        }
+        .message-status {
+            font-size: 0.75rem;
+            margin-left: 5px;
+        }
+        .chat-bubble-sent {
+            background-color: #0d6efd;
+            color: white;
+            border-radius: 20px 20px 5px 20px;
+            padding: 10px 15px;
+            max-width: 75%;
+            margin-bottom: 10px;
+            position: relative;
+            word-wrap: break-word;
+        }
+        .chat-bubble-received {
+            background-color: #f0f2f5;
+            color: #212529;
+            border-radius: 20px 20px 20px 5px;
+            padding: 10px 15px;
+            max-width: 75%;
+            margin-bottom: 10px;
+            position: relative;
+            word-wrap: break-word;
+        }
+        .chat-date-divider {
+            display: flex;
+            align-items: center;
+            margin: 20px 0;
+        }
+        .chat-date-divider::before,
+        .chat-date-divider::after {
+            content: "";
+            flex: 1;
+            border-bottom: 1px solid #dee2e6;
+        }
+        .chat-date-divider span {
+            padding: 0 10px;
+            font-size: 0.85rem;
+            color: #6c757d;
+        }
+        .message-read-status {
+            display: inline-block;
+            margin-left: 5px;
+        }
+        .message-read-status.read .bi-check {
+            display: none;
+        }
+        .message-read-status.read .bi-check-all {
+            display: inline;
+            color: #0d6efd;
+        }
+        .message-read-status .bi-check {
+            display: inline;
+        }
+        .message-read-status .bi-check-all {
+            display: none;
+        }
+        #file-preview {
+            max-width: 100%;
+            max-height: 200px;
+            margin-top: 10px;
+            display: none;
+        }
+        .file-upload-button {
+            position: relative;
+            overflow: hidden;
+        }
+        .file-upload-button input[type=file] {
+            position: absolute;
+            font-size: 100px;
+            right: 0;
+            top: 0;
+            opacity: 0;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="beranda.html">OurDate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="beranda.html"><i class="bi bi-house-door"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="explore.html"><i class="bi bi-compass"></i> Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matches.html"><i class="bi bi-heart"></i> Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="chat.html"><i class="bi bi-chat-dots"></i> Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="bi bi-person"></i> Profil</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="bi bi-person-circle"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                            <li>
+                                <a class="dropdown-item" href="#" data-bs-toggle="modal" data-bs-target="#statusModal">
+                                    <span class="status-indicator status-online"></span> Atur Status
+                                </a>
+                            </li>
+                            <li><a class="dropdown-item" href="settings.html"><i class="bi bi-gear"></i> Pengaturan</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="index.html"><i class="bi bi-box-arrow-right"></i> Keluar</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        <div class="row">
+            <!-- Chat List -->
+            <div class="col-md-4 mb-4">
+                <div class="card shadow-sm rounded">
+                    <div class="card-header bg-white">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h5 class="mb-0">Percakapan</h5>
+                            <div class="btn-group" role="group">
+                                <input type="radio" class="btn-check" name="chat-filter" id="all-chats" autocomplete="off" checked>
+                                <label class="btn btn-outline-primary btn-sm" for="all-chats">Semua</label>
+                                
+                                <input type="radio" class="btn-check" name="chat-filter" id="online-chats" autocomplete="off">
+                                <label class="btn btn-outline-primary btn-sm" for="online-chats">Online</label>
+                                
+                                <input type="radio" class="btn-check" name="chat-filter" id="unread-chats" autocomplete="off">
+                                <label class="btn btn-outline-primary btn-sm" for="unread-chats">Belum Dibaca</label>
+                            </div>
+                        </div>
+                        <div class="mt-2">
+                            <div class="input-group">
+                                <span class="input-group-text bg-light border-end-0">
+                                    <i class="bi bi-search"></i>
+                                </span>
+                                <input type="text" class="form-control bg-light border-start-0" id="search-chat" placeholder="Cari percakapan...">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush" id="chat-contacts">
+                            <!-- Chat Item Active -->
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action active py-3" data-contact="sinta" data-status="online">
+                                <div class="d-flex">
+                                    <div class="position-relative">
+                                        <div class="col-auto">
+                                            <img src="images/sinta.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                                        </div>
+                                        <span class="position-absolute bottom-0 end-0 status-indicator status-online"></span>
+                                        <span class="position-absolute top-0 end-0 unread-badge">2</span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Sinta Dewi</h6>
+                                            <small>13:45</small>
+                                        </div>
+                                        <p class="mb-0 text-truncate">Kamu sedang apa sekarang?</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <!-- Other Chat Items -->
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3" data-contact="budi" data-status="offline">
+                                <div class="d-flex">
+                                    <div class="position-relative">
+                                        <div class="col-auto">
+                                            <img src="images/budi.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                                        </div>
+                                        <span class="position-absolute bottom-0 end-0 status-indicator status-offline"></span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Budi Santoso</h6>
+                                            <small>Kemarin</small>
+                                        </div>
+                                        <p class="mb-0 text-truncate">Boleh minta rekomendasi tempat makan?</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3" data-contact="putri" data-status="online">
+                                <div class="d-flex">
+                                    <div class="position-relative">
+                                        <div class="col-auto">
+                                            <img src="images/putri.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                                        </div>
+                                        <span class="position-absolute bottom-0 end-0 status-indicator status-online"></span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Putri Indah</h6>
+                                            <small>2 hari lalu</small>
+                                        </div>
+                                        <p class="mb-0 text-truncate">Kamu suka film apa nih?</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3" data-contact="andi" data-status="away">
+                                <div class="d-flex">
+                                    <div class="position-relative">
+                                        <div class="col-auto">
+                                            <img src="images/andi.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                                        </div>
+                                        <span class="position-absolute bottom-0 end-0 status-indicator status-away"></span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Andi Wijaya</h6>
+                                            <small>3 hari lalu</small>
+                                        </div>
+                                        <p class="mb-0 text-truncate">Halo, apa kabar?</p>
+                                    </div>
+                                </div>
+                            </a>
+                            <a href="javascript:void(0)" class="list-group-item list-group-item-action py-3" data-contact="dian" data-status="busy">
+                                <div class="d-flex">
+                                    <div class="position-relative">
+                                        <div class="col-auto">
+                                            <img src="images/dian.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                                        </div>
+                                        <span class="position-absolute bottom-0 end-0 status-indicator status-busy"></span>
+                                        <span class="position-absolute top-0 end-0 unread-badge">1</span>
+                                    </div>
+                                    <div class="ms-3">
+                                        <div class="d-flex justify-content-between align-items-center">
+                                            <h6 class="mb-0">Dian Permata</h6>
+                                            <small>5 hari lalu</small>
+                                        </div>
+                                        <p class="mb-0 text-truncate">Besok jadi pergi ke museum bareng?</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Chat Area -->
+            <div class="col-md-8">
+                <div class="card shadow-sm rounded chat-container">
+                    <!-- Chat Header -->
+                    <div class="card-header bg-white py-3">
+                        <div class="d-flex align-items-center">
+                            <div class="position-relative">
+                                <div class="col-auto">
+                                    <img src="images/sinta.jpg" id="contact-avatar" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                                </div>
+                                <span class="position-absolute bottom-0 end-0 status-indicator status-online" id="contact-status-indicator"></span>
+                            </div>
+                            <div class="ms-3">
+                                <h5 class="mb-0" id="contact-name">Sinta Dewi</h5>
+                                <small class="text-muted">
+                                    <span class="status-indicator status-online"></span>
+                                    <span id="contact-status-text">Online</span>
+                                    <!-- Typing indicator markup -->
+                                    <span class="ms-2 typing-indicator" id="typing-indicator" style="display: none;">
+                                        <span></span>
+                                        <span></span>
+                                        <span></span>
+                                    </span>
+                                </small>
+                            </div>
+                            <div class="ms-auto">
+                                <div class="dropdown">
+                                    <button class="btn btn-outline-primary btn-sm rounded-pill dropdown-toggle" type="button" id="chatActionsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bi bi-three-dots"></i> Aksi
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="chatActionsDropdown">
+                                        <li><a class="dropdown-item" href="#" id="view-profile"><i class="bi bi-person"></i> Lihat Profil</a></li>
+                                        <li><a class="dropdown-item" href="#" id="delete-conversation"><i class="bi bi-trash"></i> Hapus Percakapan</a></li>
+                                        <li><a class="dropdown-item" href="#"><i class="bi bi-bell-slash"></i> Matikan Notifikasi</a></li>
+                                        <li><hr class="dropdown-divider"></li>
+                                        <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-x-circle"></i> Blokir Pengguna</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Messages -->
+                    <div class="card-body overflow-auto p-4 chat-messages" id="chat-messages">
+                        <!-- Date Separator -->
+                        <div class="chat-date-divider">
+                            <span>Hari ini</span>
+                        </div>
+                        
+                        <!-- Received Message -->
+                        <div class="d-flex mb-3">
+                            <div class="col-auto">
+                                <img src="images/sinta.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                            </div>
+                            <div class="ms-2">
+                                <div class="chat-bubble-received">
+                                    <p class="mb-0">Hai, apa kabar? Aku lihat kita punya kesamaan hobi tentang mendaki gunung.</p>
+                                </div>
+                                <div class="d-flex">
+                                    <small class="text-muted message-time">10:30</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sent Message -->
+                        <div class="d-flex justify-content-end mb-3">
+                            <div class="me-2">
+                                <div class="chat-bubble-sent">
+                                    <p class="mb-0">Halo! Iya, aku suka sekali mendaki. Kamu sudah pernah mendaki gunung apa saja?</p>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <small class="text-white-50 message-time">10:35</small>
+                                    <div class="message-read-status read">
+                                        <i class="bi bi-check"></i>
+                                        <i class="bi bi-check-all"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Received Message -->
+                        <div class="d-flex mb-3">
+                            <div class="col-auto">
+                                <img src="images/sinta.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                            </div>
+                            <div class="ms-2">
+                                <div class="chat-bubble-received">
+                                    <p class="mb-0">Aku sudah pernah mendaki Semeru, Rinjani, dan Merapi. Kalau kamu?</p>
+                                </div>
+                                <div class="d-flex">
+                                    <small class="text-muted message-time">10:42</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Sent Message -->
+                        <div class="d-flex justify-content-end mb-3">
+                            <div class="me-2">
+                                <div class="chat-bubble-sent">
+                                    <p class="mb-0">Wah keren! Aku baru Merapi dan Merbabu. Masih pemula. Kapan-kapan kita bisa mendaki bareng.</p>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <small class="text-white-50 message-time">10:45</small>
+                                    <div class="message-read-status read">
+                                        <i class="bi bi-check"></i>
+                                        <i class="bi bi-check-all"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Received Message -->
+                        <div class="d-flex mb-3">
+                            <div class="col-auto">
+                                <img src="images/sinta.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                            </div>
+                            <div class="ms-2">
+                                <div class="chat-bubble-received">
+                                    <p class="mb-0">Boleh banget! Aku rencana bulan depan mau ke Lawu. Mau ikut?</p>
+                                </div>
+                                <div class="d-flex">
+                                    <small class="text-muted message-time">13:10</small>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Received Message -->
+                        <div class="d-flex mb-3">
+                            <div class="col-auto">
+                                <img src="images/sinta.jpg" class="rounded-circle" alt="Profile Picture" style="width: 40px; height: 40px; object-fit: cover;">
+                            </div>
+                            <div class="ms-2">
+                                <div class="chat-bubble-received">
+                                    <p class="mb-0">Kamu sedang apa sekarang?</p>
+                                </div>
+                                <div class="d-flex">
+                                    <small class="text-muted message-time">13:45</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Chat Input -->
+                    <div class="card-footer bg-white position-relative">
+                        <!-- File preview container -->
+                        <div id="file-preview-container" class="mb-2" style="display: none;">
+                            <div class="position-relative d-inline-block">
+                                <img id="file-preview" class="img-thumbnail">
+                                <button type="button" id="remove-file" class="btn btn-sm btn-danger position-absolute top-0 end-0">
+                                    <i class="bi bi-x"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- Emoji picker -->
+                        <div class="emoji-picker" id="emoji-picker">
+                            <div class="d-flex justify-content-between mb-2">
+                                <div>Emoji</div>
+                                <button type="button" class="btn-close" id="close-emoji"></button>
+                            </div>
+                            <div class="emoji-grid">
+                                <!-- Generated by JS -->
+                            </div>
+                        </div>
+                        
+                        <form id="chat-form">
+                            <div class="input-group">
+                                <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <i class="bi bi-plus"></i>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <label class="dropdown-item file-upload-button">
+                                            <i class="bi bi-image"></i> Foto
+                                            <input type="file" id="file-upload" accept="image/*">
+                                        </label>
+                                    </li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-camera"></i> Kamera</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-file-earmark"></i> Dokumen</a></li>
+                                    <li><a class="dropdown-item" href="#"><i class="bi bi-geo-alt"></i> Lokasi</a></li>
+                                </ul>
+                                <button class="btn btn-outline-secondary" type="button" id="emoji-button">
+                                    <i class="bi bi-emoji-smile"></i>
+                                </button>
+                                <input type="text" class="form-control" id="message-input" placeholder="Ketik pesan..." aria-label="Ketik pesan" required>
+                                <button class="btn btn-primary" type="submit">
+                                    <i class="bi bi-send"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Status Modal -->
+    <div class="modal fade" id="statusModal" tabindex="-1" aria-labelledby="statusModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="statusModalLabel">Atur Status</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="status-form">
+                    <div class="modal-body">
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="statusRadio" id="statusOnline" value="online" checked>
+                            <label class="form-check-label" for="statusOnline">
+                                <span class="status-indicator status-online"></span> Online
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="statusRadio" id="statusAway" value="away">
+                            <label class="form-check-label" for="statusAway">
+                                <span class="status-indicator status-away"></span> Tidak di tempat
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="radio" name="statusRadio" id="statusBusy" value="busy">
+                            <label class="form-check-label" for="statusBusy">
+                                <span class="status-indicator status-busy"></span> Sibuk
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="statusRadio" id="statusOffline" value="offline">
+                            <label class="form-check-label" for="statusOffline">
+                                <span class="status-indicator status-offline"></span> Tampil Offline
+                            </label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

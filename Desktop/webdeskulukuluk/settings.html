@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengaturan - OurDate</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="beranda.html">OurDate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="beranda.html">Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matches.html">Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chat.html">Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html">Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="settings.html">Pengaturan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Settings Section -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Settings Sidebar -->
+            <div class="col-lg-4 mb-4">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title fw-bold mb-3">Kategori Pengaturan</h5>
+                        <div class="list-group list-group-flush">
+                            <a href="#account-settings" class="list-group-item list-group-item-action active py-3">
+                                <i class="bi bi-person me-2"></i> Akun
+                            </a>
+                            <a href="#privacy-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-shield-lock me-2"></i> Privasi
+                            </a>
+                            <a href="#notification-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-bell me-2"></i> Notifikasi
+                            </a>
+                            <a href="#preferences-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-sliders me-2"></i> Preferensi
+                            </a>
+                            <a href="#payment-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-credit-card me-2"></i> Pembayaran
+                            </a>
+                        </div>
+                        <div class="d-grid gap-2 mt-4">
+                            <button class="btn btn-outline-danger">Keluar</button>
+                            <button class="btn btn-danger">Hapus Akun</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Content -->
+            <div class="col-lg-8">
+                <!-- Account Settings -->
+                <div id="account-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title fw-bold mb-0">Pengaturan Akun</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="fullName" class="form-label">Nama Lengkap</label>
+                                <input type="text" class="form-control" id="fullName" value="OurDate SpanGanas">
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" value="ourdate@gmail.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Nomor Telepon</label>
+                                <input type="tel" class="form-control" id="phone" value="+62 813-3956-3984">
+                            </div>
+                            <div class="mb-4">
+                                <label for="birthdate" class="form-label">Tanggal Lahir</label>
+                                <input type="date" class="form-control" id="birthdate" value="2025-01-01">
+                            </div>
+                            <button type="submit" class="btn btn-danger">Simpan Perubahan</button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div id="privacy-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title fw-bold mb-0">Pengaturan Privasi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="showOnlineStatus" checked>
+                            <label class="form-check-label" for="showOnlineStatus">Tampilkan status online</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="showLastSeen" checked>
+                            <label class="form-check-label" for="showLastSeen">Tampilkan terakhir dilihat</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="showLocation">
+                            <label class="form-check-label" for="showLocation">Tampilkan lokasi saya</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="privateProfile">
+                            <label class="form-check-label" for="privateProfile">Profil privat</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-2">Simpan Perubahan</button>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div id="notification-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title fw-bold mb-0">Pengaturan Notifikasi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="newMatchNotif" checked>
+                            <label class="form-check-label" for="newMatchNotif">Notifikasi match baru</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="messageNotif" checked>
+                            <label class="form-check-label" for="messageNotif">Notifikasi pesan baru</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="likeNotif" checked>
+                            <label class="form-check-label" for="likeNotif">Notifikasi suka baru</label>
+                        </div>
+                        <div class="form-check form-switch mb-3">
+                            <input class="form-check-input" type="checkbox" id="eventNotif">
+                            <label class="form-check-label" for="eventNotif">Notifikasi acara dan promosi</label>
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-2">Simpan Perubahan</button>
+                    </div>
+                </div>
+
+                <!-- Preferences Settings -->
+                <div id="preferences-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title fw-bold mb-0">Pengaturan Preferensi</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="language" class="form-label">Bahasa</label>
+                            <select class="form-select" id="language">
+                                <option selected>Indonesia</option>
+                                <option>English</option>
+                                <option>中文</option>
+                                <option>日本語</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="theme" class="form-label">Tema</label>
+                            <select class="form-select" id="theme">
+                                <option selected>Terang</option>
+                                <option>Gelap</option>
+                                <option>Otomatis (ikuti sistem)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label d-block">Rentang Umur</label>
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="text-muted">18</span>
+                                <input type="range" class="form-range flex-grow-1" min="18" max="80" value="25" id="minAge">
+                                <input type="range" class="form-range flex-grow-1" min="18" max="80" value="35" id="maxAge">
+                                <span class="text-muted">80</span>
+                            </div>
+                            <div class="text-center text-muted small">
+                                Tampilkan pengguna berusia 25-35 tahun
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Jarak Maksimum</label>
+                            <input type="range" class="form-range" min="1" max="100" value="25" id="maxDistance">
+                            <div class="text-center text-muted small">
+                                Tampilkan pengguna dalam radius 25 km
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-danger mt-2">Simpan Perubahan</button>
+                    </div>
+                </div>
+
+                <!-- Payment Settings -->
+                <div id="payment-settings" class="card border-0 shadow-sm">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title fw-bold mb-0">Pengaturan Pembayaran</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h6 class="fw-bold">Paket Langganan Aktif</h6>
+                            <div class="d-flex align-items-center">
+                                <div class="bg-danger bg-opacity-10 text-danger p-3 rounded-circle me-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0 fw-bold">OurDate Premium</h6>
+                                    <p class="text-muted mb-0 small">Aktif hingga 15 Juni 2025</p>
+                                </div>
+                                <a href="#" class="btn btn-sm btn-outline-danger ms-auto">Kelola</a>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <h6 class="fw-bold mb-3">Metode Pembayaran</h6>
+                            <div class="d-flex align-items-center mb-3 p-3 border rounded">
+                                <div class="me-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-credit-card" viewBox="0 0 16 16">
+                                        <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V4zm2-1a1 1 0 0 0-1 1v1h14V4a1 1 0 0 0-1-1H2zm13 4H1v5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7z"/>
+                                        <path d="M2 10a1 1 0 0 1 1-1h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1z"/>
+                                    </svg>
+                                </div>
+                                <div>
+                                    <h6 class="mb-0">Visa ****6789</h6>
+                                    <p class="text-muted mb-0 small">Kadaluarsa 09/27</p>
+                                </div>
+                                <div class="ms-auto">
+                                    <span class="badge bg-success">Utama</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-outline-danger btn-sm">+ Tambah Metode Pembayaran</button>
+                        </div>
+                        <div class="mb-3">
+                            <h6 class="fw-bold mb-3">Riwayat Transaksi</h6>
+                            <div class="list-group list-group-flush">
+                                <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">OurDate Premium 3 Bulan</h6>
+                                        <p class="text-muted mb-0 small">15 Maret 2025</p>
+                                    </div>
+                                    <span class="fw-bold">Rp 299.000</span>
+                                </div>
+                                <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">Super Like (Paket 5)</h6>
+                                        <p class="text-muted mb-0 small">1 Maret 2025</p>
+                                    </div>
+                                    <span class="fw-bold">Rp 49.000</span>
+                                </div>
+                                <div class="list-group-item px-0 d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <h6 class="mb-0">OurDate Premium 1 Bulan</h6>
+                                        <p class="text-muted mb-0 small">15 Desember 2024</p>
+                                    </div>
+                                    <span class="fw-bold">Rp 129.000</span>
+                                </div>
+                            </div>
+                            <a href="#" class="btn btn-link text-danger p-0 mt-2">Lihat semua transaksi</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+</body>
+</html>

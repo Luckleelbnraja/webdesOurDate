@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OurDate - Discover</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+    <style>
+        .profile-card {
+            position: relative;
+            max-width: 400px;
+            margin: 0 auto;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .profile-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+        .profile-image {
+            height: 500px;
+            object-fit: cover;
+        }
+        .profile-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), rgba(0,0,0,0));
+            color: white;
+            border-bottom-left-radius: 15px;
+            border-bottom-right-radius: 15px;
+        }
+        .profile-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            z-index: 5;
+        }
+        .interest-badge {
+            background-color: rgba(255,255,255,0.2);
+            backdrop-filter: blur(5px);
+            color: white;
+            margin-right: 5px;
+        }
+        .action-buttons .btn {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+        .action-buttons .btn:hover {
+            transform: scale(1.1);
+        }
+        .action-buttons .btn i {
+            font-size: 1.5rem;
+        }
+        .carousel-control-prev, .carousel-control-next {
+            width: 10%;
+            opacity: 0.7;
+        }
+        .carousel-indicators {
+            bottom: -50px;
+        }
+        .stats-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        #profileCarousel {
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .carousel-item {
+            transition: transform 0.6s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="beranda.html">OurDate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="beranda.html"><i class="bi bi-house-door"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="explore.html"><i class="bi bi-compass"></i> Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="matches.html"><i class="bi bi-heart"></i> Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chat.html"><i class="bi bi-chat-dots"></i> Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="bi bi-person"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="settings.html"><i class="bi bi-gear"></i> Pengaturan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container py-4">
+        <!-- Header -->
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Temukan Match Kamu</h2>
+            <p class="text-muted">Pilih profil yang menarik untuk menemukan kecocokan</p>
+        </div>
+        
+        <!-- Tabs -->
+        <ul class="nav nav-pills nav-fill mb-4">
+            <li class="nav-item">
+                <a class="nav-link" href="matches.html"><i class="bi bi-heart-fill"></i> Matches</a>
+            </li>
+        </ul>
+        
+        <!-- Profile Cards using Bootstrap Carousel -->
+        <div class="row justify-content-center mb-5">
+            <div class="col-md-8 col-lg-6">
+                <div id="profileCarousel" class="carousel slide shadow" data-bs-ride="false" data-bs-interval="false">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#profileCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Profile 1"></button>
+                        <button type="button" data-bs-target="#profileCarousel" data-bs-slide-to="1" aria-label="Profile 2"></button>
+                        <button type="button" data-bs-target="#profileCarousel" data-bs-slide-to="2" aria-label="Profile 3"></button>
+                    </div>
+                    
+                    <div class="carousel-inner">
+                        <!-- Profile 1 -->
+                        <div class="carousel-item active">
+                            <div class="profile-card">
+                                <span class="badge bg-primary profile-badge">Premium</span>
+                                <img src="images/sinta.jpg" class="profile-image w-100" alt="Profile Picture">
+                                <div class="profile-info">
+                                    <h3 class="mb-1">Sinta Dewi, 25</h3>
+                                    <p class="mb-2"><i class="bi bi-geo-alt"></i> Jakarta, 5 km</p>
+                                    <div class="d-flex flex-wrap mb-3">
+                                        <span class="badge interest-badge me-1 mb-1">Mendaki</span>
+                                        <span class="badge interest-badge me-1 mb-1">Fotografi</span>
+                                        <span class="badge interest-badge mb-1">Film</span>
+                                    </div>
+                                    <p>Suka petualangan dan mencari teman hidup yang menyenangkan. Baru kembali dari pendakian Gunung Rinjani.</p>
+                                    
+                                    <!-- Profile actions for this card only -->
+                                    <div class="text-center mt-3">
+                                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#profileModal1">
+                                            Lihat Profil Lengkap <i class="bi bi-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Profile 2 -->
+                        <div class="carousel-item">
+                            <div class="profile-card">
+                                <span class="badge bg-success profile-badge">Online</span>
+                                <img src="images/putri.jpg" class="profile-image w-100" alt="Profile Picture">
+                                <div class="profile-info">
+                                    <h3 class="mb-1">Putri Indah, 27</h3>
+                                    <p class="mb-2"><i class="bi bi-geo-alt"></i> Bandung, 120 km</p>
+                                    <div class="d-flex flex-wrap mb-3">
+                                        <span class="badge interest-badge me-1 mb-1">Musik</span>
+                                        <span class="badge interest-badge me-1 mb-1">Traveling</span>
+                                        <span class="badge interest-badge mb-1">Memasak</span>
+                                    </div>
+                                    <p>Suka bernyanyi dan memasak. Mencari seseorang yang juga menyukai musik dan seni kuliner.</p>
+                                    
+                                    <!-- Profile actions for this card only -->
+                                    <div class="text-center mt-3">
+                                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#profileModal2">
+                                            Lihat Profil Lengkap <i class="bi bi-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Profile 3 -->
+                        <div class="carousel-item">
+                            <div class="profile-card">
+                                <span class="badge bg-success profile-badge">Online</span>
+                                <img src="images/rina.jpg" class="profile-image w-100" alt="Profile Picture">
+                                <div class="profile-info">
+                                    <h3 class="mb-1">Rina Amalia, 24</h3>
+                                    <p class="mb-2"><i class="bi bi-geo-alt"></i> Jakarta, 3 km</p>
+                                    <div class="d-flex flex-wrap mb-3">
+                                        <span class="badge interest-badge me-1 mb-1">Seni</span>
+                                        <span class="badge interest-badge me-1 mb-1">Buku</span>
+                                        <span class="badge interest-badge mb-1">Kopi</span>
+                                    </div>
+                                    <p>Pecinta kopi dan buku. Senang menghabiskan waktu di kafe sambil membaca novel.</p>
+                                    
+                                    <!-- Profile actions for this card only -->
+                                    <div class="text-center mt-3">
+                                        <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#profileModal3">
+                                            Lihat Profil Lengkap <i class="bi bi-arrow-right"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Navigation Arrows -->
+                    <button class="carousel-control-prev" type="button" data-bs-target="#profileCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#profileCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+                
+                <!-- Action Buttons -->
+                <div class="action-buttons d-flex justify-content-center gap-4 mt-4">
+                    <button class="btn btn-light shadow" data-bs-target="#profileCarousel" data-bs-slide="next">
+                        <i class="bi bi-x-lg text-danger"></i>
+                    </button>
+                    <button class="btn btn-light shadow" data-bs-target="#profileCarousel" data-bs-slide="prev">
+                        <i class="bi bi-heart-fill text-success"></i>
+                    </button>
+                </div>
+                
+                <!-- Instruction Text -->
+                <div class="text-center text-muted mt-3">
+                    <small><i class="bi bi-arrow-left"></i> Tidak tertarik  <i class="bi bi-info-circle"></i> &nbsp;&nbsp; Tertarik <i class="bi bi-arrow-right"></i></small>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Match Stats -->
+        <div class="card shadow-sm mt-5">
+            <div class="card-body">
+                <h5 class="card-title">Statistik Matches</h5>
+                <div class="row text-center">
+                    <div class="col-4">
+                        <div class="stats-icon text-primary">
+                            <i class="bi bi-hand-thumbs-up"></i>
+                        </div>
+                        <h3 class="text-primary">24</h3>
+                        <p class="text-muted">Total Likes</p>
+                    </div>
+                    <div class="col-4">
+                        <div class="stats-icon text-success">
+                            <i class="bi bi-hearts"></i>
+                        </div>
+                        <h3 class="text-success">8</h3>
+                        <p class="text-muted">Matches</p>
+                    </div>
+                    <div class="col-4">
+                        <div class="stats-icon text-danger">
+                            <i class="bi bi-chat-heart"></i>
+                        </div>
+                        <h3 class="text-danger">3</h3>
+                        <p class="text-muted">Chat Aktif</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Profile Detail Modals -->
+    <!-- Modal for Profile 1 -->
+    <div class="modal fade" id="profileModal1" tabindex="-1" aria-labelledby="profileModal1Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModal1Label">Profil Lengkap</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <img src="images/sinta.jpg" class="rounded-circle img-thumbnail" style="width:
+                        150px; height: 150px; object-fit: cover;" alt="Profile Picture">
+                    </div>
+                    <h3 class="text-center mb-3">Sinta Dewi, 25</h3>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-geo-alt"></i> Lokasi</h6>
+                        <p>Jakarta, 5 km dari Anda</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-briefcase"></i> Pekerjaan</h6>
+                        <p>Fotografer Profesional</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-mortarboard"></i> Pendidikan</h6>
+                        <p>S1 Desain Komunikasi Visual, Universitas Indonesia</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-tags"></i> Minat</h6>
+                        <div class="d-flex flex-wrap">
+                            <span class="badge bg-primary me-1 mb-1">Mendaki</span>
+                            <span class="badge bg-primary me-1 mb-1">Fotografi</span>
+                            <span class="badge bg-primary me-1 mb-1">Film</span>
+                            <span class="badge bg-primary me-1 mb-1">Traveling</span>
+                            <span class="badge bg-primary me-1 mb-1">Kuliner</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-quote"></i> Tentang Saya</h6>
+                        <p>Suka petualangan dan mencari teman hidup yang menyenangkan. Baru kembali dari pendakian Gunung Rinjani. Sangat menikmati fotografi landscape dan street photography. Suka menonton film-film indie dan dokumenter perjalanan.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="startChat()">Chat</button>
+                    <button type="button" class="btn btn-success" id="likeButton">
+                        <i class="bi bi-heart-fill me-1"></i> Suka
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Profile 2 (similar structure) -->
+    <div class="modal fade" id="profileModal2" tabindex="-1" aria-labelledby="profileModal2Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModal2Label">Profil Lengkap</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <img src="images/putri.jpg" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;" alt="Profile Picture">
+                    </div>
+                    <h3 class="text-center mb-3">Putri Indah, 27</h3>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-geo-alt"></i> Lokasi</h6>
+                        <p>Bandung, 120 km dari Anda</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-briefcase"></i> Pekerjaan</h6>
+                        <p>Chef di Restoran Bintang 5</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-mortarboard"></i> Pendidikan</h6>
+                        <p>Sekolah Kuliner Le Cordon Bleu</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-tags"></i> Minat</h6>
+                        <div class="d-flex flex-wrap">
+                            <span class="badge bg-primary me-1 mb-1">Musik</span>
+                            <span class="badge bg-primary me-1 mb-1">Traveling</span>
+                            <span class="badge bg-primary me-1 mb-1">Memasak</span>
+                            <span class="badge bg-primary me-1 mb-1">Konser</span>
+                            <span class="badge bg-primary me-1 mb-1">Wine Tasting</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-quote"></i> Tentang Saya</h6>
+                        <p>Suka bernyanyi dan memasak. Mencari seseorang yang juga menyukai musik dan seni kuliner. Hobi mengeksplorasi resep baru dan menghadiri konser live. Bercita-cita membuka restoran sendiri suatu hari nanti.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="startChat()">Chat</button>
+                    <button type="button" class="btn btn-success" id="likeButton">
+                        <i class="bi bi-heart-fill me-1"></i> Suka
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal for Profile 3 (similar structure) -->
+    <div class="modal fade" id="profileModal3" tabindex="-1" aria-labelledby="profileModal3Label" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="profileModal3Label">Profil Lengkap</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-3">
+                        <img src="images/rina.jpg" class="rounded-circle img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;" alt="Profile Picture">
+                    </div>
+                    <h3 class="text-center mb-3">Rina Amalia, 24</h3>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-geo-alt"></i> Lokasi</h6>
+                        <p>Jakarta, 3 km dari Anda</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-briefcase"></i> Pekerjaan</h6>
+                        <p>Barista & Penulis</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-mortarboard"></i> Pendidikan</h6>
+                        <p>S1 Sastra Indonesia, Universitas Gadjah Mada</p>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-tags"></i> Minat</h6>
+                        <div class="d-flex flex-wrap">
+                            <span class="badge bg-primary me-1 mb-1">Seni</span>
+                            <span class="badge bg-primary me-1 mb-1">Buku</span>
+                            <span class="badge bg-primary me-1 mb-1">Kopi</span>
+                            <span class="badge bg-primary me-1 mb-1">Menulis</span>
+                            <span class="badge bg-primary me-1 mb-1">Pameran</span>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <h6><i class="bi bi-quote"></i> Tentang Saya</h6>
+                        <p>Pecinta kopi dan buku. Senang menghabiskan waktu di kafe sambil membaca novel. Saat ini sedang menulis kumpulan cerpen pertama saya. Sangat menikmati diskusi tentang seni dan literatur.</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="startChat()">Chat</button>
+                    <button type="button" class="btn btn-success" id="likeButton">
+                        <i class="bi bi-heart-fill me-1"></i> Suka
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Out of Profiles Modal -->
+    <div class="modal fade" id="noProfilesModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center p-5">
+                    <i class="bi bi-emoji-smile text-primary" style="font-size: 4rem;"></i>
+                    <h4 class="mt-3">Tidak ada profil lagi untuk saat ini</h4>
+                    <p class="mb-4">Coba lagi nanti atau ubah preferensi pencarian Anda</p>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Mengerti</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Premium Feature Modal -->
+    <div class="modal fade" id="premiumModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">Tingkatkan ke Premium</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center p-4">
+                    <i class="bi bi-star-fill text-warning" style="font-size: 3rem;"></i>
+                    <h4 class="mt-3">Dapatkan Fitur Premium</h4>
+                    <p class="mb-4">Akses tak terbatas, lihat siapa yang menyukai Anda, dan fitur ekslusif lainnya.</p>
+                    <div class="row mb-4">
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5>1 Bulan</h5>
+                                    <h4 class="text-primary">99rb</h4>
+                                    <p class="text-muted">Per bulan</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100 border-primary">
+                                <div class="card-header bg-primary text-white py-1">
+                                    <small>POPULER</small>
+                                </div>
+                                <div class="card-body text-center">
+                                    <h5>6 Bulan</h5>
+                                    <h4 class="text-primary">69rb</h4>
+                                    <p class="text-muted">Per bulan</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <div class="card h-100">
+                                <div class="card-body text-center">
+                                    <h5>12 Bulan</h5>
+                                    <h4 class="text-primary">49rb</h4>
+                                    <p class="text-muted">Per bulan</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-lg btn-primary">Berlangganan Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-white mt-5 py-3 border-top">
+        <div class="container text-center">
+            <p class="text-muted mb-0">&copy; 2025 OurDate - Temukan Cinta Sejatimu</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function startChat() {
+            window.location.href = "chat.html";
+        }
+    
+        let liked = false;
+        document.getElementById("likeButton").addEventListener("click", function () {
+            liked = !liked;
+            if (liked) {
+                this.classList.remove("btn-success");
+                this.classList.add("btn-danger");
+                this.innerHTML = '<i class="bi bi-heartbreak-fill me-1"></i> Tidak Suka';
+            } else {
+                this.classList.remove("btn-danger");
+                this.classList.add("btn-success");
+                this.innerHTML = '<i class="bi bi-heart-fill me-1"></i> Suka';
+            }
+        });
+    </script>
+</body>
+</html>

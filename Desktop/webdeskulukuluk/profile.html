@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OurDate - Pengaturan</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
+</head>
+<body class="bg-light">
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+        <div class="container">
+            <a class="navbar-brand text-primary fw-bold" href="beranda.html">OurDate</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="beranda.html"><i class="bi bi-house-door"></i> Beranda</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="explore.html"><i class="bi bi-compass"></i> Explore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="matches.html"><i class="bi bi-heart"></i> Matches</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="chat.html"><i class="bi bi-chat-dots"></i> Chat</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="profile.html"><i class="bi bi-person"></i> Profil</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="settings.html"><i class="bi bi-gear"></i> Pengaturan</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Settings Content -->
+    <div class="container py-5">
+        <div class="row">
+            <!-- Settings Sidebar -->
+            <div class="col-lg-3 mb-4 mb-lg-0">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-0">
+                        <div class="list-group list-group-flush rounded-2">
+                            <a href="#profile-settings" class="list-group-item list-group-item-action active py-3">
+                                <i class="bi bi-person-fill me-2"></i> Informasi Profil
+                            </a>
+                            <a href="#account-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-shield-lock-fill me-2"></i> Akun & Keamanan
+                            </a>
+                            <a href="#preference-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-sliders me-2"></i> Preferensi Kencan
+                            </a>
+                            <a href="#notification-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-bell-fill me-2"></i> Notifikasi
+                            </a>
+                            <a href="#privacy-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-eye-fill me-2"></i> Privasi
+                            </a>
+                            <a href="#help-settings" class="list-group-item list-group-item-action py-3">
+                                <i class="bi bi-question-circle-fill me-2"></i> Bantuan & Dukungan
+                            </a>
+                            <a href="login.html" class="list-group-item list-group-item-action text-danger py-3">
+                                <i class="bi bi-box-arrow-right me-2"></i> Keluar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Settings Content -->
+            <div class="col-lg-9">
+                <!-- Profile Settings -->
+                <div id="profile-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Informasi Profil</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="text-center mb-4">
+                                <div class="position-relative mx-auto" style="width: 120px; height: 120px;">
+                                    <img src="images/date-logo.png" class="rounded-circle w-100 h-100 object-fit-cover border border-3 border-white shadow" alt="Profile Picture">
+                                    <label for="profile-photo" class="btn btn-sm btn-primary position-absolute bottom-0 end-0 rounded-circle p-2" style="cursor: pointer;">
+                                        <i class="bi bi-camera-fill"></i>
+                                        <input type="file" id="profile-photo" class="d-none">
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="first-name" class="form-label">Nama Depan</label>
+                                    <input type="text" class="form-control" id="first-name" value="OurDate">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="last-name" class="form-label">Nama Belakang</label>
+                                    <input type="text" class="form-control" id="last-name" value="SpanGanas">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="bio" class="form-label">Tentang Saya</label>
+                                <textarea class="form-control" id="bio" rows="4">Hai! Saya OurDate, seorang WebDeveloper. Saya senang melakukan perjalanan dan mengabadikan momen indah dengan kamera saya dan menampilkannya diwebsite saya. Saya mencari seseorang yang bisa menjadi teman petualangan dan mencoba berbagai makanan unik di seluruh dunia.</textarea>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="dob" class="form-label">Tanggal Lahir</label>
+                                    <input type="date" class="form-control" id="dob" value="2025-01-01">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="gender" class="form-label">Jenis Kelamin</label>
+                                    <select class="form-select" id="gender">
+                                        <option value="female" selected>Laki-laki</option>
+                                        <option value="male">Perempuan</option>
+                                        <option value="other">Lainnya</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-md-6 mb-3 mb-md-0">
+                                    <label for="job" class="form-label">Pekerjaan</label>
+                                    <input type="text" class="form-control" id="job" value="WebDeveloper">
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="education" class="form-label">Pendidikan</label>
+                                    <input type="text" class="form-control" id="education" value="S1 Informatika">
+                                </div>
+                            </div>
+
+                            <div class="mb-3">
+                                <label for="location" class="form-label">Lokasi</label>
+                                <input type="text" class="form-control" id="location" value="Sulawesi Utara">
+                            </div>
+
+                            <div class="mb-3">
+                                <label class="form-label">Minat</label>
+                                <div class="d-flex flex-wrap gap-2">
+                                    <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+                                        Coding
+                                        <i class="bi bi-x-circle-fill ms-1" style="cursor: pointer;"></i>
+                                    </span>
+                                    <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+                                        Fotografi
+                                        <i class="bi bi-x-circle-fill ms-1" style="cursor: pointer;"></i>
+                                    </span>
+                                    <span class="badge bg-primary bg-opacity-10 text-primary p-2">
+                                        Kuliner
+                                        <i class="bi bi-x-circle-fill ms-1" style="cursor: pointer;"></i>
+                                    </span>
+                                    <button class="btn btn-sm btn-outline-primary" type="button" data-bs-toggle="modal" data-bs-target="#interestModal">+ Tambah</button>
+                                </div>
+                            </div>
+
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Account Settings -->
+                <div id="account-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Akun & Keamanan</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" value="ourdate@gmail.com">
+                            </div>
+                            <div class="mb-3">
+                                <label for="phone" class="form-label">Nomor Telepon</label>
+                                <input type="tel" class="form-control" id="phone" value="+6281339563984">
+                            </div>
+                            <div class="mb-3">
+                                <label for="current-password" class="form-label">Password Saat Ini</label>
+                                <input type="password" class="form-control" id="current-password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="new-password" class="form-label">Password Baru</label>
+                                <input type="password" class="form-control" id="new-password">
+                            </div>
+                            <div class="mb-3">
+                                <label for="confirm-password" class="form-label">Konfirmasi Password Baru</label>
+                                <input type="password" class="form-control" id="confirm-password">
+                            </div>
+                            <div class="form-check mb-3">
+                                <input class="form-check-input" type="checkbox" id="two-factor" checked>
+                                <label class="form-check-label" for="two-factor">
+                                    Aktifkan autentikasi dua faktor
+                                </label>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Perbarui Keamanan</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Dating Preferences -->
+                <div id="preference-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Preferensi Kencan</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">Saya Tertarik Dengan</label>
+                                <div class="d-flex gap-3">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="male-interest" checked>
+                                        <label class="form-check-label" for="male-interest">
+                                            Laki-laki
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="female-interest">
+                                        <label class="form-check-label" for="female-interest">
+                                            Perempuan
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="other-interest">
+                                        <label class="form-check-label" for="other-interest">
+                                            Lainnya
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="age-range" class="form-label">Rentang Usia</label>
+                                <div class="row align-items-center">
+                                    <div class="col-5">
+                                        <input type="number" class="form-control" id="min-age" value="18">
+                                    </div>
+                                    <div class="col-2 text-center">
+                                        <span>hingga</span>
+                                    </div>
+                                    <div class="col-5">
+                                        <input type="number" class="form-control" id="max-age" value="25">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="distance" class="form-label">Jarak Maksimum (km)</label>
+                                <input type="range" class="form-range" id="distance" min="1" max="100" value="25">
+                                <div class="text-end">25 km</div>
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">Tujuan Kencan</label>
+                                <select class="form-select" id="dating-purpose">
+                                    <option selected>Hubungan serius</option>
+                                    <option>Kencan kasual</option>
+                                    <option>Berteman</option>
+                                    <option>Networking</option>
+                                </select>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Simpan Preferensi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notification Settings -->
+                <div id="notification-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Pengaturan Notifikasi</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Notifikasi Match Baru</h6>
+                                        <small class="text-muted">Dapatkan notifikasi saat ada match baru</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="match-notification" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Pesan Baru</h6>
+                                        <small class="text-muted">Dapatkan notifikasi saat ada pesan baru</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="message-notification" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Like</h6>
+                                        <small class="text-muted">Dapatkan notifikasi saat seseorang menyukai profil Anda</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="like-notification" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Email Promosi</h6>
+                                        <small class="text-muted">Dapatkan penawaran dan promosi melalui email</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="promo-notification">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Simpan Notifikasi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Privacy Settings -->
+                <div id="privacy-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Pengaturan Privasi</h5>
+                    </div>
+                    <div class="card-body">
+                        <form>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Mode Pribadi</h6>
+                                        <small class="text-muted">Hanya orang yang Anda sukai yang dapat melihat profil Anda</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="private-mode">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Tampilkan Status Online</h6>
+                                        <small class="text-muted">Izinkan orang lain melihat status online Anda</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="online-status" checked>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Sembunyikan Usia</h6>
+                                        <small class="text-muted">Sembunyikan usia Anda dari profil publik</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="hide-age">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="d-flex justify-content-between align-items-center mb-2">
+                                    <div>
+                                        <h6 class="mb-0">Sembunyikan Jarak</h6>
+                                        <small class="text-muted">Sembunyikan jarak Anda dari profil publik</small>
+                                    </div>
+                                    <div class="form-check form-switch">
+                                        <input class="form-check-input" type="checkbox" id="hide-distance">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Simpan Privasi</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Help & Support -->
+                <div id="help-settings" class="card border-0 shadow-sm mb-4">
+                    <div class="card-header bg-white py-3">
+                        <h5 class="card-title mb-0">Bantuan & Dukungan</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h6>Pusat Bantuan</h6>
+                            <p class="text-muted">Temukan jawaban untuk pertanyaan umum dan panduan penggunaan.</p>
+                            <a href="#" class="btn btn-outline-primary">Buka Pusat Bantuan</a>
+                        </div>
+                        <div class="mb-4">
+                            <h6>Hubungi Kami</h6>
+                            <p class="text-muted">Ada masalah atau pertanyaan? Tim dukungan kami siap membantu.</p>
+                            <a href="#" class="btn btn-outline-primary">Kirim Pesan</a>
+                        </div>
+                        <div class="mb-4">
+                            <h6>Kebijakan Privasi</h6>
+                            <p class="text-muted">Pelajari bagaimana kami menangani data pribadi Anda.</p>
+                            <a href="#" class="btn btn-outline-primary">Baca Kebijakan</a>
+                        </div>
+                        <div>
+                            <h6>Syarat & Ketentuan</h6>
+                            <p class="text-muted">Pelajari ketentuan penggunaan layanan kami.</p>
+                            <a href="#" class="btn btn-outline-primary">Baca Syarat</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Interest Modal -->
+    <div class="modal fade" id="interestModal" tabindex="-1" aria-labelledby="interestModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="interestModalLabel">Tambah Minat</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <input type="text" class="form-control" placeholder="Cari minat...">
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button class="btn btn-sm btn-outline-primary">Musik</button>
+                        <button class="btn btn-sm btn-outline-primary">Film</button>
+                        <button class="btn btn-sm btn-outline-primary">Olahraga</button>
+                        <button class="btn btn-sm btn-outline-primary">Buku</button>
+                        <button class="btn btn-sm btn-outline-primary">Gaming</button>
+                        <button class="btn btn-sm btn-outline-primary">Memasak</button>
+                        <button class="btn btn-sm btn-outline-primary">Yoga</button>
+                        <button class="btn btn-sm btn-outline-primary">Hiking</button>
+                        <button class="btn btn-sm btn-outline-primary">Berkebun</button>
+                        <button class="btn btn-sm btn-outline-primary">Seni</button>
+                        <button class="btn btn-sm btn-outline-primary">Teknologi</button>
+                        <button class="btn btn-sm btn-outline-primary">Hewan</button>
+                        <button class="btn btn-sm btn-outline-primary">Desain</button>
+                        <button class="btn btn-sm btn-outline-primary">Politik</button>
+                        <button class="btn btn-sm btn-outline-primary">Lingkungan</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary">Tambahkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JavaScript Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
