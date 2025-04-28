@@ -42,7 +42,14 @@
             <!-- Settings Sidebar -->
             <div class="col-lg-4 mb-4">
                 <div class="card border-0 shadow-sm">
-                    <div class="card-body">
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel">Offcanvas with body scrolling</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+	<div class="card-body">
                         <h5 class="card-title fw-bold mb-3">Kategori Pengaturan</h5>
                         <div class="list-group list-group-flush">
                             <a href="#account-settings" class="list-group-item list-group-item-action active py-3">
@@ -66,6 +73,8 @@
                             <button class="btn btn-danger">Hapus Akun</button>
                         </div>
                     </div>
+  </div>
+</div>
                 </div>
             </div>
 
@@ -74,7 +83,7 @@
                 <!-- Account Settings -->
                 <div id="account-settings" class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-white py-3">
-                        <h5 class="card-title fw-bold mb-0">Pengaturan Akun</h5>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Pengaturan Akun</button>
                     </div>
                     <div class="card-body">
                         <form>

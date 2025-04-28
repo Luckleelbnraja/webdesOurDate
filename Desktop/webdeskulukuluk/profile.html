@@ -46,7 +46,14 @@
             <!-- Settings Sidebar -->
             <div class="col-lg-3 mb-4 mb-lg-0">
                 <div class="card border-0 shadow-sm">
-                    <div class="card-body p-0">
+
+<div class="offcanvas offcanvas-start" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasScrolling" aria-labelledby="offcanvasScrollingLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasScrollingLabel"></h5>
+    <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <div class="card-body p-0">
                         <div class="list-group list-group-flush rounded-2">
                             <a href="#profile-settings" class="list-group-item list-group-item-action active py-3">
                                 <i class="bi bi-person-fill me-2"></i> Informasi Profil
@@ -73,13 +80,15 @@
                     </div>
                 </div>
             </div>
+                </div>
+            </div>
             
             <!-- Settings Content -->
             <div class="col-lg-9">
                 <!-- Profile Settings -->
                 <div id="profile-settings" class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-white py-3">
-                        <h5 class="card-title mb-0">Informasi Profil</h5>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling">Informasi Profile</button>
                     </div>
                     <div class="card-body">
                         <form>
